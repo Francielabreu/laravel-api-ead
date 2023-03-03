@@ -10,6 +10,8 @@ class Course extends Model
 {
     use HasFactory, UuidTrait;
 
+    public $incrementing = false;
+    protected $keytype = 'uuid';
     protected $fillable =[
         'name',
         'description',

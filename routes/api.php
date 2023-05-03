@@ -3,9 +3,10 @@
 use App\Http\Controllers\Api\{
     CourseController,
     ModuleController,
-    LessonController
+    LessonController,
+    SupportController
 };
-use App\Http\Controllers\SupportController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

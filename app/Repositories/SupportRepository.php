@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Support;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class SupportRepository
@@ -15,8 +16,31 @@ class SupportRepository
         $this->entity = $support;
     }
 
-    public function getSupports()
+    public function getSupports(array $filters = [])
     {
-        
+        return $this->getUserAuth()->supports()->where(function($query) use ($filters){
+            if (isset($filters['lesson'])) {
+                $query->where('lesson_id', $filters['lesson']);
+            }
+
+            if (isset($filters['status'])) {
+                $query->where('status', $filters['status']);
+            }
+
+            if (isset($filters['filter'])) {
+                $filter = $filters['filter'];
+                $query->where('description', 'LIKE', "%{$filter}%");
+            }
+
+        })->get();
     }
+
+    public function getUserAuth(): User
+    {
+       return User::first();
+    }
+
+
+
+
 }

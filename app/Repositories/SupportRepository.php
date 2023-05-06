@@ -4,11 +4,13 @@ namespace App\Repositories;
 
 use App\Models\Support;
 use App\Models\User;
+use App\Repositories\Traits\RepositoryTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class SupportRepository
 {
-
+    use RepositoryTrait;
+    
     protected $entity;
 
     public function __construct(Support $support)
@@ -60,15 +62,12 @@ class SupportRepository
                     ]);
     }
 
-    private function getSupport(string $id)
+    public function getSupport(string $id)
     {
         return $this->entity->findOrFail($id);
     }
 
-    private function getUserAuth(): User
-    {
-       return User::first();
-    }
+    
 
     
 
